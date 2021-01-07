@@ -1,0 +1,12 @@
+.parent {
+    background-color: lightgray;
+    height: 400px;
+    margin-left: 50px;
+    width: 500px;
+    .line {
+        height: 20px;
+        margin: 10px 5px;
+        background-color: white;
+        border: 1px solid black;
+    }
+}

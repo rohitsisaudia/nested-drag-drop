@@ -1,0 +1,17 @@
+.child-box {
+    border: 1px solid brown;
+    background-color: lightgreen;
+    margin: 0 5px;
+    .header {
+        background-color: darkgray;
+        height: 30px;
+        margin-bottom: 10px;
+    }
+.child-line {
+    height: 20px;
+    margin: 10px 0;
+    background-color: white;
+    border: 1px solid black;
+}
+
+}

@@ -1,0 +1,4 @@
+<div class="child-box" cdkDropList [cdkDropListConnectedTo]="containerList" id="{{containerId}}"  (cdkDropListDropped)="dropped($event)" >
+  <div class="header" >Header</div>
+  <div *ngFor="let item of children; let idx=index" cdkDrag [cdkDragData] = "item" class="child-line">{{item}}</div>
+</div>

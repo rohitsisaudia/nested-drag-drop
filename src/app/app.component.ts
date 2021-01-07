@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-root',
@@ -15,23 +16,25 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.createMappedArr();
+    this.createMappedArr(this.dataArr);
   }
 
-  createMappedArr() {
+  createMappedArr(data) {
+    this.mappedArr=[];
+    this.containerList=[];
     let j = 0;
-    for(let i=0;i < this.dataArr.length; i++) {
-      if (typeof(this.dataArr[i]) === 'string') {
+    for(let i=0;i < data.length; i++) {
+      if (typeof(data[i]) === 'string') {
         if (this.mappedArr[j]) {
-          this.mappedArr[j].push(this.dataArr[i]);
+          this.mappedArr[j].push(data[i]);
         } else {
           this.containerList.push('primary-' + j.toString());
-          this.mappedArr[j] = [this.dataArr[i]];
+          this.mappedArr[j] = [data[i]];
         }
       } else {
         j++;
         this.containerList.push('nested-'+j.toString());
-        this.mappedArr[j]=[this.dataArr[i]];
+        this.mappedArr[j]=[data[i]];
         j++;
       }
     }
@@ -71,6 +74,7 @@ export class AppComponent implements OnInit {
     }
     
     console.log('final data', [].concat.apply([], this.mappedArr))
+    this.createMappedArr([].concat.apply([], this.mappedArr));
   }
 
   newContainerDrag($event) {

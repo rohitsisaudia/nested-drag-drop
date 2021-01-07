@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ConsoleReporter } from 'jasmine';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +9,6 @@ export class AppComponent implements OnInit {
   dataArr=['list1', 'list2', 'list3', 'list4', {children: ['child1', 'child2']}, 'list 5', {children: ['child3']},'list6'];
   mappedArr: Array<any> = [];
   containerList: Array<string> = [];
-  groupMoving = false;
 
   constructor() {}
 
@@ -39,7 +36,7 @@ export class AppComponent implements OnInit {
       }
     }
     console.log('mapped', this.mappedArr);
-    console.log(this.containerList);
+    console.log('container IDs', this.containerList);
   }
 
 
@@ -75,20 +72,5 @@ export class AppComponent implements OnInit {
     
     console.log('final data', [].concat.apply([], this.mappedArr))
     this.createMappedArr([].concat.apply([], this.mappedArr));
-  }
-
-  newContainerDrag($event) {
-    console.log('new container drag,', $event);
-  }
-
-  exitedContainer($event) {
-    console.log('exited', $event);
-    const data = $event.item.data;
-    if (data.children) {
-      console.log('group moving');
-      this.groupMoving = true;
-    } else {
-      this.groupMoving = false;
-    }
   }
 }

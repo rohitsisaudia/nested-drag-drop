@@ -2,9 +2,7 @@
 <div class="listgroup">
   <div class = "parent">
     
-    <div *ngFor="let arrItem of mappedArr; let i = index" cdkDropList [cdkDropListConnectedTo]="containerList" id="primary-{{i}}" (cdkDropListDropped)="dropped($event)" 
-                                (cdkDropListEntered)="newContainerDrag($event)"  
-                                (cdkDropListExited)="exitedContainer($event)">
+    <div *ngFor="let arrItem of mappedArr; let i = index" cdkDropList [cdkDropListConnectedTo]="containerList" id="primary-{{i}}" (cdkDropListDropped)="dropped($event)">
       <div *ngFor="let item of arrItem; let idx=index">
         <div *ngIf="!item.children" class="line" cdkDrag [cdkDragData]="item">{{item}}</div>
         <app-child *ngIf="item.children" cdkDrag cdkDropList [cdkDropListConnectedTo]="containerList" 
@@ -13,9 +11,7 @@
                                 [cdkDragData]="item"
                                 [containerList]="containerList" 
                                 (dataDrop)="dropped($event)"
-                                (cdkDropListDropped)="dropped($event)" 
-                                (cdkDropListEntered)="newContainerDrag($event)"  
-                                (cdkDropListExited)="exitedContainer($event)"></app-child>
+                                (cdkDropListDropped)="dropped($event)"></app-child>
       </div>
     </div>
     <!-- <div *ngFor="let item of dataArr; let i = index" cdkDropList 

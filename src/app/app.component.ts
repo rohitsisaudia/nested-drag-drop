@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import _ from 'lodash';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -47,10 +48,15 @@ export class AppComponent implements OnInit {
     const currentContainer = $event.container.id.split('-');
     const previousContainer = $event.previousContainer.id.split('-');
     const data = $event.item.data;
+    console.log('data', data)
     if (data.children && currentContainer[0]==='nested') {
       // do nothing if a group is being dragged into another group;
       return;
     }
+
+    console.log('previousContainer', previousContainer);
+    console.log('currentContainer', currentContainer);
+
 
     // handle drop from one primary to another primary
     if (previousContainer[0] === 'primary' && currentContainer[0] === 'primary') {
@@ -69,8 +75,9 @@ export class AppComponent implements OnInit {
       this.mappedArr[previousContainer[1]][0].children.splice(previousIndex, 1);
       this.mappedArr[currentContainer[1]][0].children.splice(currentIndex, 0, data).join();
     }
-    
-    console.log('final data', [].concat.apply([], this.mappedArr))
-    this.createMappedArr([].concat.apply([], this.mappedArr));
+    let finalData = [].concat.apply([], this.mappedArr);
+    finalData = _.filter(finalData, function(a) { return !_.isUndefined(a)});
+    console.log('final data', finalData)
+    this.createMappedArr(finalData);
   }
 }

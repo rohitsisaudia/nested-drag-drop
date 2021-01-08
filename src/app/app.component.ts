@@ -26,17 +26,26 @@ export class AppComponent implements OnInit {
         if (this.mappedArr[j]) {
           this.mappedArr[j].push(data[i]);
         } else {
-          this.containerList.push('primary-' + j.toString());
           this.mappedArr[j] = [data[i]];
         }
       } else {
         j++;
-        this.containerList.push('nested-'+j.toString());
         this.mappedArr[j]=[data[i]];
         j++;
       }
     }
     console.log('mapped', this.mappedArr);
+    // remove empty elements
+    this.mappedArr = _.filter(this.mappedArr, function(a) { return !_.isEmpty(a)});
+    console.log('mapped', this.mappedArr);
+    
+    for (let i = 0; i < this.mappedArr.length; i++) {
+      if (this.mappedArr[i][0].children) {
+          this.containerList.push('nested-' + i.toString());
+      } else {
+          this.containerList.push('primary-'+ i.toString());
+      }
+    }
     console.log('container IDs', this.containerList);
   }
 
